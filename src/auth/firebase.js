@@ -1,12 +1,14 @@
 import { initializeApp } from "firebase/app";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
+  getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
 // TODO: Replace the following with your app's Firebase project configuration
-// See: https://firebase.google.com/docs/web/learn-more#config-object
+//* https://firebase.google.com/docs/auth/web/start
+//* https://console.firebase.google.com/ => project settings
+//! firebase console settings bölümünden firebaseconfig ayarlarını al
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
   authDomain: process.env.REACT_APP_authDomain,
@@ -23,6 +25,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 export const createUser = async (email, password, navigate) => {
+  //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
   try {
     let userCredential = await createUserWithEmailAndPassword(
       auth,
@@ -31,16 +34,16 @@ export const createUser = async (email, password, navigate) => {
     );
     navigate("/");
     console.log(userCredential);
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };
 
 //* https://console.firebase.google.com/
 //* => Authentication => sign-in-method => enable Email/password
 //! Email/password ile girişi enable yap
-
 export const signIn = async (email, password, navigate) => {
+  //? mevcut kullanıcının giriş yapması için kullanılan firebase metodu
   try {
     let userCredential = await signInWithEmailAndPassword(
       auth,
@@ -49,7 +52,7 @@ export const signIn = async (email, password, navigate) => {
     );
     navigate("/");
     console.log(userCredential);
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };

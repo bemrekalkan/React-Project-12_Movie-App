@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { signIn } from "../auth/firebase";
+import { signIn } from "../auth/firebase.js";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -21,7 +21,6 @@ const Login = () => {
       <div className="register-form">
         <h1 className="form-title display-3 ">Register</h1>
         <form id="register" onSubmit={handleLogin}>
-          <div className="mb-3"></div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
               Email
@@ -48,14 +47,14 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="link">Forgat Password?</div>
+          <div className="link">Forgot Password?</div>
           <input
             type="submit"
             className="btn btn-primary form-control"
             value="Login"
           />
         </form>
-        <button className="btn btn-primary form-control">
+        <button className="btn btn-primary form-control ">
           Continue with Google
         </button>
       </div>
