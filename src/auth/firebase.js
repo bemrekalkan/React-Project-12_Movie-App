@@ -2,8 +2,10 @@ import { initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  signInWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -35,15 +37,11 @@ export const createUser = async (email, password, navigate, displayName) => {
       email,
       password
     );
-    //? Kullanıcı profilini güncellemek için kullanılan firebase metodu
+    //? kullanıcı profilini güncellemek için kullanılan firebase metodu
     await updateProfile(auth.currentUser, {
       displayName: displayName,
     });
     navigate("/");
-
-    //! user bilgisini sessionStorage'a atıyoruz 👇
-    // sessionStorage.setItem("user", JSON.stringify(userCredential.user));
-
     console.log(userCredential);
   } catch (err) {
     console.log(err);
@@ -62,6 +60,7 @@ export const signIn = async (email, password, navigate) => {
       password
     );
     navigate("/");
+    // sessionStorage.setItem('user', JSON.stringify(userCredential.user));
     console.log(userCredential);
   } catch (err) {
     console.log(err);
@@ -74,6 +73,7 @@ export const userObserver = (setCurrentUser) => {
     if (user) {
       setCurrentUser(user);
     } else {
+      // User is signed out
       setCurrentUser(false);
     }
   });
@@ -81,4 +81,24 @@ export const userObserver = (setCurrentUser) => {
 
 export const logOut = () => {
   signOut(auth);
+};
+
+//* https://console.firebase.google.com/
+//* => Authentication => sign-in-method => enable Google
+//! Google ile girişi enable yap
+//* => Authentication => sign-in-method => Authorized domains => add domain
+//! Projeyi deploy ettikten sonra google sign-in çalışması için domain listesine deploy linkini ekle
+export const signUpProvider = (navigate) => {
+  //? Google ile giriş yapılması için kullanılan firebase metodu
+  const provider = new GoogleAuthProvider();
+  //? Açılır pencere ile giriş yapılması için kullanılan firebase metodu
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result);
+      navigate("/");
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      console.log(error);
+    });
 };
