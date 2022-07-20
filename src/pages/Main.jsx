@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
@@ -9,6 +9,7 @@ const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}
 const Main = () => {
   const [movies, setMovies] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     getMovies(FEATURED_API);
@@ -22,16 +23,33 @@ const Main = () => {
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getMovies(SEARCH_API + searchTerm);
+  };
+
   return (
-    <div className="d-flex justify-content-center flex-wrap ">
-      {loading ? (
-        <div className="spinner-border text-primary m-5" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      ) : (
-        movies?.map((movie) => <MovieCard key={movie.id} {...movie} />)
-      )}
-    </div>
+    <>
+      <form className="search" onSubmit={handleSubmit}>
+        <input
+          type="search"
+          className="search-input"
+          placeholder="Search a movie..."
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+      <div className="d-flex justify-content-center flex-wrap ">
+        {loading ? (
+          <div className="spinner-border text-primary m-5" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        ) : (
+          movies?.map((movie) => <MovieCard key={movie.id} {...movie} />)
+        )}
+      </div>
+    </>
   );
 };
 
