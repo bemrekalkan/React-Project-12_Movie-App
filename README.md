@@ -82,8 +82,8 @@ Build a Movie App using ReactJS.
   - Add the Firebase Authentication JS codes in your `firebase.js` file and initialize Firebase Authentication:
 
 ```jsx
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
 // TODO: Replace the following with your app's Firebase project configuration at project settings part
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -101,7 +101,7 @@ const auth = getAuth(app);
 - Use this method to `Sign up new users` :
 
 ```jsx
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
@@ -116,7 +116,7 @@ createUserWithEmailAndPassword(auth, email, password)
 - Use this method to `Sign in existing users` :
 
 ```jsx
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
@@ -131,7 +131,7 @@ signInWithEmailAndPassword(auth, email, password)
 - Use this method to `Set an authentication state observer and get user data` :
 
 ```jsx
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -146,7 +146,7 @@ onAuthStateChanged(auth, (user) => {
 - Use this method to `Authenticate Using Google with Popup` :
 
 ```jsx
-import { GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const provider = new GoogleAuthProvider();
 
@@ -164,7 +164,7 @@ signInWithPopup(auth, provider)
 - Use this method to `Sign Out` :
 
 ```jsx
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut } from 'firebase/auth';
 
 signOut(auth)
   .then(() => {

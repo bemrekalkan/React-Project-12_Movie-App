@@ -1,7 +1,7 @@
-import React from "react";
-import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import React from 'react';
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -27,13 +27,13 @@ const Navbar = () => {
               <>
                 <button
                   className="ms-2 btn btn-outline-light"
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate('/login')}
                 >
                   Login
                 </button>
                 <button
                   className="ms-2 btn btn-outline-light"
-                  onClick={() => navigate("/register")}
+                  onClick={() => navigate('/register')}
                 >
                   Register
                 </button>
