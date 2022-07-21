@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext, useAuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { logOut } from "../auth/firebase";
 
 const Navbar = () => {
